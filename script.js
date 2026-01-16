@@ -84,7 +84,7 @@ sendBtn.onclick = () => {
 
   input.value = "";
 
-  fetch("https://drastica-backend.onrender.com", {
+  fetch("https://drastica-backend.onrender.com/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -127,6 +127,7 @@ input.addEventListener("keydown", (e) => {
 const sessionList = document.getElementById("sessionList");
 
 renderSessions();
+
 
 
 
