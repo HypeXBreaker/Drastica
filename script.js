@@ -84,7 +84,7 @@ sendBtn.onclick = () => {
 
   input.value = "";
 
-  fetch("http://127.0.0.1:8000/chat", {
+  fetch("https://drastica-backend.onrender.com/chat", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -127,4 +127,5 @@ input.addEventListener("keydown", (e) => {
 const sessionList = document.getElementById("sessionList");
 
 renderSessions();
+
 
