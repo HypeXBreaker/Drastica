@@ -57,6 +57,9 @@ const chatBox = document.getElementById("chatBox");
 const input = document.getElementById("userInput");
 const sendBtn = document.getElementById("sendBtn");
 
+// 🔥 Per-tab session (safe, optional, backend loves this)
+const SESSION_ID = crypto.randomUUID();
+
 function addMessage(text, type) {
   const msg = document.createElement("div");
   msg.className = `message ${type}`;
@@ -81,7 +84,6 @@ sendBtn.onclick = () => {
 
   const userText = input.value;
   addMessage(userText, "user");
-
   input.value = "";
 
   fetch("https://drastica-backend.onrender.com/chat", {
@@ -90,7 +92,7 @@ sendBtn.onclick = () => {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      session_id: "public-session-1",
+      session_id: SESSION_ID,
       message: userText
     })
   })
@@ -106,7 +108,6 @@ sendBtn.onclick = () => {
     addMessage("Connection error. Is the server running?", "bot");
     console.error(err);
   });
-
 };
 
 // -----------------------------
@@ -114,8 +115,8 @@ sendBtn.onclick = () => {
 // -----------------------------
 input.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
-    e.preventDefault(); // stops default behavior (like form submit)
-    if (input.value.trim()) { // only send if input is not empty
+    e.preventDefault();
+    if (input.value.trim()) {
       sendBtn.click();
     }
   }
@@ -126,11 +127,10 @@ input.addEventListener("keydown", (e) => {
 // -----------------------------
 const sessionList = document.getElementById("sessionList");
 
+// 🛡️ REQUIRED so JS DOES NOT CRASH
+function renderSessions() {
+  // Panel intentionally kept empty
+  // Backend sessions are active, UI list is disabled
+}
+
 renderSessions();
-
-
-
-
-
-
-
